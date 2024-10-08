@@ -7,8 +7,6 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-
-	"github.com/hashicorp/go-multierror"
 )
 
 func (app *App) run() {
@@ -17,10 +15,7 @@ func (app *App) run() {
 	terminateChan := app.createTerminateSignal()
 
 	if err := app.Start(); app.err != nil || err != nil {
-		var mErr *multierror.Error
-		if errors.As(app.err, &mErr) {
-			app.logger.Sugar().Panicw("failed to start application", "error", mErr.Errors)
-		}
+		app.logger.Sugar().Panicw("failed to start application", "error", err)
 	}
 
 	<-terminateChan
@@ -39,7 +34,7 @@ func (app *App) createTerminateSignal() <-chan struct{} {
 		sigVal := <-sigint
 
 		if err := app.Stop(ctx); err != nil {
-			app.err = multierror.Append(app.err, err)
+			app.err = errors.Join(app.err, err)
 		}
 
 		switch sigVal {

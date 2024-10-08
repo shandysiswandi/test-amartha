@@ -1,14 +1,15 @@
 package app
 
 import (
-	"github.com/hashicorp/go-multierror"
+	"errors"
+
 	"go.uber.org/zap"
 )
 
 func (app *App) initLogger() {
 	logger, err := zap.NewDevelopment(zap.AddStacktrace(zap.FatalLevel))
 	if err != nil {
-		app.err = multierror.Append(app.err, err)
+		app.err = errors.Join(app.err, err)
 	}
 
 	app.logger = logger

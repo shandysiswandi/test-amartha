@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/hashicorp/go-multierror"
 	"github.com/julienschmidt/httprouter"
 	"github.com/shandysiswandi/test-amartha/internal/loan"
 	"github.com/shandysiswandi/test-amartha/internal/pkg/pkgsql"
@@ -40,7 +39,7 @@ func (app *App) Start() error {
 	go func() {
 		app.logger.Sugar().Info("http server listen on", app.httpServer.Addr)
 		if err := app.httpServer.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
-			app.err = multierror.Append(app.err, err)
+			app.err = errors.Join(app.err, err)
 		}
 	}()
 
@@ -50,7 +49,7 @@ func (app *App) Start() error {
 func (app *App) Stop(ctx context.Context) error {
 	for _, closer := range app.closersFn {
 		if err := closer(ctx); err != nil {
-			app.err = multierror.Append(app.err, err)
+			app.err = errors.Join(app.err, err)
 		}
 	}
 

@@ -2,13 +2,13 @@ package app
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql" //nolint:gosec // won't be an issue
 
 	"github.com/doug-martin/goqu/v9"
-	"github.com/hashicorp/go-multierror"
 )
 
 func (app *App) setUpGoqu() {
@@ -55,11 +55,11 @@ func (app *App) initDB() {
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
-		app.err = multierror.Append(app.err, err)
+		app.err = errors.Join(app.err, err)
 	}
 
 	if err := db.Ping(); err != nil {
-		app.err = multierror.Append(app.err, err)
+		app.err = errors.Join(app.err, err)
 	}
 
 	app.database = db
