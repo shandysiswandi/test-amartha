@@ -10,4 +10,4 @@ This repository is designed with a simple structure to facilitate fast developme
 
 ## Migrations
 
-- goose -dir migration/ mysql "root:password@tcp(localhost:3306)/test_amartha?parseTime=true" up
+- goose -dir migration/ mysql "user:password@tcp(localhost:3306)/test_amartha?parseTime=true" up
