@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "1f23291d-282a-4fab-a2a2-cd0cbb409b8e",
+		"name": "TEST AMARTHA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22516371"
+	},
+	"item": [
+		{
+			"name": "Proposed Loan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 2,\n    \"interest_rate\": \"10\",\n    \"amount\": \"1000000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/loan",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"loan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Loan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"employee_id\": 33\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/loan/:loan_id/approve",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"loan",
+						":loan_id",
+						"approve"
+					],
+					"variable": [
+						{
+							"key": "loan_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invest Loan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"investor_id\": 3,\n    \"amount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/loan/:loan_id/invest",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"loan",
+						":loan_id",
+						"invest"
+					],
+					"variable": [
+						{
+							"key": "loan_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disburse Loan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/loan/:loan_id/disburse",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"loan",
+						":loan_id",
+						"disburse"
+					],
+					"variable": [
+						{
+							"key": "loan_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Agreement Letter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "agreement_letter",
+							"type": "file",
+							"src": "/Users/farislr/Downloads/letter-of-agreement-09.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8081/loan/:loan_id/upload-agreement-letter",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"loan",
+						":loan_id",
+						"upload-agreement-letter"
+					],
+					"variable": [
+						{
+							"key": "loan_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
