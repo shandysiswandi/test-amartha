@@ -1,13 +1,21 @@
-# TEST AMARTHA
+# Amartha Test Repository
 
-This repository is designed with a simple structure to facilitate fast development. The primary focus is on the implementation of solution logic for state engine for P2P lending.
+This repository is structured to enable rapid development, with a primary focus on implementing the solution logic for the state engine of a P2P lending platform.
 
 ## Setup
 
-- Install goose -> go install github.com/pressly/goose/v3/cmd/goose@latest
-- Copy .env.example to .env
-- Fill in the .env file
+To set up the environment:
+
+- Install goose
+
+```bash
+go install github.com/pressly/goose/v3/cmd/goose@latest
+```
+
+- Copy .env.example to .env then fill in the .env file
 
 ## Migrations
 
-- goose -dir migration/ mysql "user:password@tcp(localhost:3306)/test_amartha?parseTime=true" up
+```bash
+goose -dir migration/ mysql "user:password@tcp(localhost:3306)/test_amartha?parseTime=true" up
+```
